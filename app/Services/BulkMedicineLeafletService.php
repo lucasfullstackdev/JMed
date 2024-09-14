@@ -8,15 +8,19 @@ use App\Models\MedicineLeaflet;
 
 class BulkMedicineLeafletService extends BaseService
 {
-    // private string $filePath = 'app/public/medicine-leaflets-temp.json';
-    private string $filePath = 'app/public/medicine-leaflets.json';
+    private string $filePath = 'app/public/medicine-leaflets-temp-categoria.json';
     private int $chunkSize = 1000;
 
     public function load()
     {
-        $this->getData()
-            ->chunk($this->chunkSize)
-            ->each(fn($chunk) => InsertMedicineLeafletJob::dispatch($chunk));
+        $this->getData()->each(function ($category) {
+            if ($category->count() > $this->chunkSize) {
+                return $category->chunk($this->chunkSize)
+                    ->each(fn($chunk) => InsertMedicineLeafletJob::dispatch($chunk));
+            }
+
+            InsertMedicineLeafletJob::dispatch($category);
+        });
     }
 
     public function insert(array $medicineLeaflets)
@@ -35,8 +39,15 @@ class BulkMedicineLeafletService extends BaseService
         $json = file_get_contents($filePath);
         $data = json_decode($json, true);
 
-        return collect($data)->map(function ($item) {
-            return (array) new MedicineLeafletDto((object) $item);
-        });
+        $result = [];
+        foreach ($data as $category) {
+            $result[] = collect(
+                array_map(function ($medicineLeaflet) use ($category) {
+                    return (array) new MedicineLeafletDto((object) array_merge($medicineLeaflet, ['category_id' => $category['id']]));
+                }, $category['medicalLeaflets'])
+            );
+        }
+
+        return collect($result);
     }
 }

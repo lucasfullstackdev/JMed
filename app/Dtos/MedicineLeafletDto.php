@@ -7,6 +7,7 @@ use Carbon\Carbon;
 class MedicineLeafletDto
 {
     public ?string $product_id;
+    public ?string $category_id;
     public ?string $registration_number;
     public ?string $product_name;
     public ?string $expedient;
@@ -20,6 +21,7 @@ class MedicineLeafletDto
     public function __construct(object $medicineLeafletData)
     {
         $this->product_id = $medicineLeafletData->idProduto ?? null;
+        $this->category_id = $medicineLeafletData->category_id ?? null;
         $this->registration_number = $medicineLeafletData->numeroRegistro ?? null;
         $this->product_name = $medicineLeafletData->nomeProduto ?? null;
         $this->expedient = $medicineLeafletData->expediente ?? null;

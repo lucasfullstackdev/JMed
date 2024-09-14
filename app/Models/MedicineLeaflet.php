@@ -12,6 +12,7 @@ class MedicineLeaflet extends Model
     protected $table = 'medicine_leaflets';
     protected $fillable = [
         'product_id',
+        'category_id',
         'registration_number',
         'product_name',
         'expedient',
