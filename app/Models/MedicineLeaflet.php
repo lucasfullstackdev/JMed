@@ -21,6 +21,7 @@ class MedicineLeaflet extends Model
         'transaction_number',
         'date',
         'process_number',
-        'updated_at'
+        'updated_at',
+        'pdf'
     ];
 }

@@ -100,6 +100,17 @@ services:
             - '/dev/shm:/dev/shm'
         networks:
             - sail
+    
+    # horizon:
+    #     image: sail-8.0/app
+    #     container_name: sail_horizon
+    #     command: php artisan horizon
+    #     depends_on:
+    #         - api
+    #         - redis
+    #     networks:
+    #         - sail
+
 networks:
     sail:
         driver: bridge
