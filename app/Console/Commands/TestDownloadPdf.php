@@ -95,11 +95,15 @@ class TestDownloadPdf extends Command
         $medicineLeaflets->each(function ($medicineLeaflet) use (&$delayInSeconds) {
             Log::info('Registrando o Job para o registro: ' . $medicineLeaflet->registration_number);
 
+            if (empty($medicineLeaflet->registration_number)) {
+                return;
+            }
+
             GenerateTokenJob::dispatch($medicineLeaflet->registration_number)
                 ->delay(now()->addSeconds($delayInSeconds))
                 ->onQueue('queue_token');
 
-            $delayInSeconds += 10; // Incrementa o delay em 10 segundos para cada job
+            $delayInSeconds += 7; // Incrementa o delay em 7 segundos para cada job
         });
     }
 }
