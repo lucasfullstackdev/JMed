@@ -55,6 +55,20 @@ return [
             'retry_after' => 120,
         ],
 
+        'queue_download_pdf' => [
+            'driver' => 'database',
+            'table' => 'jobs',
+            'queue' => 'queue_download_pdf',
+            'retry_after' => 120,
+        ],
+
+        'queue_update_downloaded' => [
+            'driver' => 'database',
+            'table' => 'jobs',
+            'queue' => 'queue_update_downloaded',
+            'retry_after' => 120,
+        ],
+
         'database' => [
             'driver' => 'database',
             'connection' => env('DB_QUEUE_CONNECTION'),

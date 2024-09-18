@@ -7,14 +7,14 @@ use App\Models\MedicineLeaflet;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
-class TestDownloadPdf extends Command
+class GenerateBase64Pdf extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:test-download-pdf';
+    protected $signature = 'app:generate-base64-pdf';
 
     /**
      * The console command description.

@@ -22,6 +22,7 @@ class MedicineLeaflet extends Model
         'date',
         'process_number',
         'updated_at',
-        'pdf'
+        'pdf',
+        'downloaded',
     ];
 }
