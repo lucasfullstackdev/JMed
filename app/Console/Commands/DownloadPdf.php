@@ -28,12 +28,14 @@ class DownloadPdf extends Command
      */
     public function handle()
     {
-        $medicineLeaflets = MedicineLeaflet::whereNotNull('pdf')
-            ->limit(1)
+        $medicineLeaflets = MedicineLeaflet::where('downloaded', false)
+            ->limit(5000)
             ->get();
 
-        $medicineLeaflets->each(function ($medicineLeaflet) {
-            DownloadPdfJob::dispatch($medicineLeaflet)->onQueue('queue_download_pdf');
+        $delay = 0;
+        $medicineLeaflets->each(function ($medicineLeaflet) use (&$delay) {
+            DownloadPdfJob::dispatch($medicineLeaflet)->delay($delay += 5)
+            ->onQueue('queue_download_pdf');
         });
         
         // $medicineLeaflet = MedicineLeaflet::where('registration_number', '183260400')->first();

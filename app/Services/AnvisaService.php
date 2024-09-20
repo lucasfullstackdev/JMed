@@ -7,6 +7,7 @@ use App\Jobs\GetPdfOfTheMedicineLeafletJob;
 use App\Jobs\SavePdfOfTheMedicineLeafletJob;
 use App\Jobs\UpdatePdfDownloaded;
 use App\Models\MedicineLeaflet;
+use App\Services\Storages\IStorage;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 
@@ -132,16 +133,18 @@ class AnvisaService extends BaseService
         }
     }
 
-    public function drive(MedicineLeaflet $medicineLeaflet)
-    {}
+    public function drive(MedicineLeaflet $medicineLeaflet, IStorage $storage)
+    {
+        // dd($medicineLeaflet, $storage);
+    }
 
-    // public function download(MedicineLeaflet $medicineLeaflet)
-    // {
-    //     $path = storage_path('app/public/medicine-leaflets/' . $medicineLeaflet->registration_number . '.pdf');
+    public function download(MedicineLeaflet $medicineLeaflet)
+    {
+        $path = storage_path('app/public/pdfs/' . $medicineLeaflet->registration_number . '.pdf');
 
-    //     $pdf = base64_decode($medicineLeaflet->pdf);
-    //     file_put_contents($path, $pdf);
+        $pdf = base64_decode($medicineLeaflet->pdf);
+        file_put_contents($path, $pdf);
 
-    //     UpdatePdfDownloaded::dispatch($medicineLeaflet)->onQueue('queue_update_downloaded');
-    // }
+        UpdatePdfDownloaded::dispatch($medicineLeaflet)->onQueue('queue_update_downloaded');
+    }
 }
