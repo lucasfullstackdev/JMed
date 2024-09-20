@@ -17,7 +17,10 @@ class SavePdfOfTheMedicineLeafletJob implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(public string $registryNumber, public string $hashMedicineLeaflet) {}
+    public function __construct(public string $registryNumber, public string $hashMedicineLeaflet)
+    {
+        //
+    }
 
     /**
      * Execute the job.

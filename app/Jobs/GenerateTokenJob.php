@@ -26,6 +26,6 @@ class GenerateTokenJob implements ShouldQueue
      */
     public function handle(): void
     {
-        (new \App\Services\AnvisaService())->generateToken($this->registryNumber);
+        (new AnvisaService())->generateToken($this->registryNumber);
     }
 }

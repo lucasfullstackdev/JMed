@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-use App\Dtos\MedicineLeafletDto;
 use App\Services\BulkMedicineLeafletService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -20,6 +19,7 @@ class InsertMedicineLeafletJob implements ShouldQueue
      */
     public function __construct(public Collection $medicineLeaflets)
     {
+        //
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Services\AnvisaService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Foundation\Queue\Queueable;
@@ -28,7 +29,7 @@ class GetPdfOfTheMedicineLeafletJob implements ShouldQueue
      */
     public function handle(): void
     {
-        $delay = (new \App\Services\AnvisaService())->getPdf($this->registryNumber, $this->hashMedicineLeaflet);
+        $delay = (new AnvisaService())->getPdf($this->registryNumber, $this->hashMedicineLeaflet);
 
         Log::info('Atrasando a execução do Job por ' . $delay . ' segundos');
         if (!empty($delay)) {
