@@ -11,6 +11,10 @@
 <h1 align="center">JMed</h1>
 <h4 align="center">Solucionando um problema real com Laravel</h4>
 
+## Por que este projeto?
+- Este projeto foi criado simulando um cenário onde uma clínica precisava de todas as mais de 8 mil bulas, para posterior alimentação de um site feito em WordPress. 
+- A clínica havia chamado outros desenvolvedores, porém como a API da Anvisa apresenta graves problemas de instabilidade e eficiência, a obtenção dos PDF's em tempo real era algo inviável.
+
 ## Sobre o projeto
 Fazer o download de todas as mais de 8 mill bulas disponíveis.
 
@@ -22,10 +26,6 @@ Pontos abordados:
  - Eloquent ORM
  - POO
  - Modelagem do Banco de Dados
-
-## Por que este projeto?
-- Este projeto foi criado simulando um cenário onde uma clínica precisava de todas as mais de 8 mil bulas, para posterior alimentação de um site feito em WordPress. 
-- A clínica havia chamado outros desenvolvedores, porém como a API da Anvisa apresenta graves problemas de instabilidade e eficiência, a obtenção dos PDF's em tempo real era algo inviável.
 
 ## Cenário
 
